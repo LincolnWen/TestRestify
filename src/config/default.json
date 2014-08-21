@@ -1,0 +1,3 @@
+{
+	"MainDb" : "mongodb://dxlisting:dxlisting@listing.db.wenxi.biz:27018/pdc"
+}

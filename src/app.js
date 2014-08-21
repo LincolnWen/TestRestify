@@ -1,18 +1,43 @@
-var restify = require('restify');
+var Restify = require('restify');
+var DalPdcBase = require('./DALs/DalPdcBase').DalPdcBase;
 
-var server = restify.createServer({
-  name: 'myapp',
+var dal = new DalPdcBase();
+
+
+
+
+var server = Restify.createServer({
+  name: 'wxApp',
   version: '1.0.0'
 });
-server.use(restify.acceptParser(server.acceptable));
-server.use(restify.queryParser());
-server.use(restify.bodyParser());
 
-server.get('/echo/:name', function (req, res, next) {
-  res.send(req.params);
-  return next();
+server.use(Restify.acceptParser(server.acceptable));
+server.use(Restify.queryParser());
+server.use(Restify.bodyParser());
+
+server.get('/products/:sku', function (req, res, next) {
+  var cond = {
+  	"primaryCategoryId" : 422
+  };
+
+  dal.search('product', cond, function(items){
+		res.send(items);
+		return next();
+  });
 });
 
-server.listen(8080, function () {
-  console.log('%s listening at %s', server.name, server.url);
+
+
+
+dal.onInitSucc(function(){
+	console.log('初始化数据库连接成功，接下来将启动网站。');
+	server.listen(8080, function () {
+	  console.log('%s listening at %s', server.name, server.url);
+	});
 });
+
+dal.onInitFail(function(err){
+	console.log('数据库连接初始化失败，将不会启动网站。');
+});
+
+dal.InitConnection();
