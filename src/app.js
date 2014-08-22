@@ -1,9 +1,7 @@
 var Restify = require('restify');
-var DalPdcBase = require('./DALs/DalPdcBase').DalPdcBase;
+var QueryObject = require('./lib/QueryObject').QueryObject;
 
-var dal = new DalPdcBase();
-
-
+var dal = new QueryObject();
 
 
 var server = Restify.createServer({
@@ -40,4 +38,7 @@ dal.onInitFail(function(err){
 	console.log('数据库连接初始化失败，将不会启动网站。');
 });
 
+
+
+//【闻祖东 2014-8-22-162755】初始化的工作
 dal.InitConnection();
