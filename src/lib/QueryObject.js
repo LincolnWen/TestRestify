@@ -13,26 +13,22 @@ QueryObject.prototype.db = function(){
 	return this.db;
 };
 
-QueryObject.prototype.InitConnection = function(){
+QueryObject.prototype.init = function(){
 	MongoClient.connect("mongodb://test:test@listing.db.wenxi.biz:27018/pdc", {native_parser:true}, function(err, db) {
 		if(err){
 			this.initStatus = false;
-			this.emit('initFail', err);
+			this.emit('init', false, err);
 			return;
 		}
 
 		this.initStatus = true;
 		this.db = db;
-		this.emit('initSucc');
+		this.emit('init', true);
 	}.bind(this));
 };
 
-QueryObject.prototype.onInitSucc = function(callback){
-	this.addListener('initSucc', callback);
-};
-
-QueryObject.prototype.onInitFail = function(callback){
-	this.addListener('initFail', callback);
+QueryObject.prototype.onInit = function(callback){
+	this.addListener('init', callback);
 };
 
 exports.QueryObject = QueryObject;
