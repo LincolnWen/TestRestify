@@ -1,4 +1,6 @@
 {
-	"dependencies" : "2.8.2",
-	"mongodb" : "1.4.8"
+    "dependencies": {
+        "mongodb": "1.4.8",
+        "restify": "2.8.2"
+    }
 }
