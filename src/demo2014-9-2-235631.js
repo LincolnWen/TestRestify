@@ -1,4 +1,3 @@
-var DalNseBase = require('./DALs/NSE/DalNseBase');
-var DalPdcBase = require('./DALs/Pdc/DalPdcBase');
+require('./Servers/MainRestServer');
+require('./Servers/RouteManager');
 
-console.log(DalPdcBase.queryObject.db);

@@ -1,5 +1,5 @@
-var dalBase = require('./DalBase');
+var qo = require('./DalPdcBase').queryObject;
 
 exports.search = function(cond, callback){
-	dalBase.search('product', cond, callback);
+	qo.search('product', cond, callback);
 };
