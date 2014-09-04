@@ -25,10 +25,23 @@ QueryObject.prototype.init = function(callback){
 	}.bind(this));
 };
 
-QueryObject.prototype.search = function(collName, cond, callback){
+QueryObject.prototype.searchWithoutOptions = function(collName, cond, callback){
+	this.search(collName, cond, {}, callback);///【闻祖东 2014-9-4-234209】即使options没有值，这个地方也不能为null。在做MongoDb的Query的时候，你不写Option那个选项，他默认也是{}而不是null。
+};
+
+QueryObject.prototype.search = function(collName, cond, options, callback){
 	var _coll = this.db.collection(collName);
+
+	//【闻祖东 2014-9-4-233516】options的示例形态。
+	// var opt = {
+	// 	skip : 10,
+	// 	limit : 20,
+	// 	fields : {
+	// 		'listingSku' : 1
+	// 	}
+	// };
 	
-	_coll.find(cond, function(err, cursor){
+	_coll.find(cond, options, function(err, cursor){
 		if(err)	throw err;
 
 		cursor.count(false, function(err, totalCount){

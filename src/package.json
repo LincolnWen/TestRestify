@@ -1,6 +1,7 @@
 {
     "dependencies": {
         "mongodb": "1.4.8",
+        "underscore": "1.6.0",
         "restify": "2.8.2"
     }
 }
