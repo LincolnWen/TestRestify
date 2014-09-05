@@ -1,5 +1,6 @@
 var Restify = require('restify');
 var RouteManager = require('./RouteManager');
+var DbManager = require('./DbManager');
 
 var server = Restify.createServer({
   name: 'wxApp',
@@ -12,6 +13,7 @@ server.use(Restify.bodyParser());
 
 server.listen(8090, function () {
   RouteManager.initRoute(server);
+  DbManager.init();
 
   console.log('%s listening at %s', server.name, server.url);
 
